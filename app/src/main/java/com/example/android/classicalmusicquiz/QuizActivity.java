@@ -137,7 +137,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         mMediaSession.setMediaButtonReceiver(null);
 
         mStateBuilder = new PlaybackStateCompat.Builder()
-                .setActions(PlaybackStateCompat.ACTION_PLAY | PlaybackStateCompat.ACTION_PAUSE | PlaybackStateCompat.ACTION_PLAY_PAUSE | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS);
+                .setActions(PlaybackStateCompat.ACTION_PLAY |
+                        PlaybackStateCompat.ACTION_PAUSE |
+                        PlaybackStateCompat.ACTION_PLAY_PAUSE |
+                        PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS);
 
         mMediaSession.setPlaybackState(mStateBuilder.build());
         mMediaSession.setCallback(new MediaSessionCallback());
@@ -335,16 +338,19 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onPlay() {
             super.onPlay();
+            mExoPlayer.setPlayWhenReady(true);
         }
 
         @Override
         public void onPause() {
             super.onPause();
+            mExoPlayer.setPlayWhenReady(false);
         }
 
         @Override
         public void onSkipToPrevious() {
             super.onSkipToPrevious();
+            mExoPlayer.seekTo(0);
         }
     }
 }
